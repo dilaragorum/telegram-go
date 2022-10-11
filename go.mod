@@ -1,4 +1,4 @@
-module telegram-go
+module github.com/dilaragorum/telegram-go
 
 go 1.19
 

@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+const projeGroupChatID = int64(-1001549822450)
+
 type telegramClient struct {
 	bot *tgbotapi.BotAPI
 }
@@ -21,15 +23,14 @@ func NewTelegramClient() *telegramClient {
 }
 
 func (t telegramClient) SendMessage(text string) error {
-	chatId := int64(-1001549822450)
-	message := tgbotapi.NewMessage(chatId, text)
+	message := tgbotapi.NewMessage(projeGroupChatID, text)
 	_, err := t.bot.Send(message)
 	return err
 }
 
 func (t telegramClient) GetMessagesAndReply() {
 	update := tgbotapi.NewUpdate(0)
-	update.Timeout = 60
+	update.Timeout = 5
 
 	updates := t.bot.GetUpdatesChan(update)
 
@@ -41,7 +42,8 @@ func (t telegramClient) GetMessagesAndReply() {
 		chatID := update.Message.Chat.ID
 
 		message := tgbotapi.NewMessage(chatID, "Sana da selam")
-		message.ReplyToMessageID = update.Message.MessageID // Hangi mesaja cevap veriyor
+		message.ReplyToMessageID = update.Message.MessageID
+
 		t.bot.Send(message)
 	}
 }
