@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const projeGroupChatID = int64(-1001549822450)
+const projectGroupChatID = int64(-1001549822450)
 
 type telegramClient struct {
 	bot *tgbotapi.BotAPI
@@ -23,7 +23,7 @@ func NewTelegramClient() *telegramClient {
 }
 
 func (t telegramClient) SendMessage(text string) error {
-	message := tgbotapi.NewMessage(projeGroupChatID, text)
+	message := tgbotapi.NewMessage(projectGroupChatID, text)
 	_, err := t.bot.Send(message)
 	return err
 }
